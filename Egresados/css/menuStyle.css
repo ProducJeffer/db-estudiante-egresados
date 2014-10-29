@@ -1,0 +1,75 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background: url(../img/bg.png);
+}
+#sesion{
+    float: left;
+    padding: 12px;
+    color: white;
+    font-size: 180%;
+    font-family: Helvetica, sans-serif;
+}
+#close{
+    padding: 12px;
+    float: right;
+}
+#button{
+    display: inline-block;
+    padding: 12px;
+    background-color: #eaeaea;
+    color: black;
+    font-family: Helvetica, sans-serif;
+    border: 1px solid #9d9e9e;
+    text-decoration: none;
+    border-radius: 15px 0px 15px 0px;
+    -moz-border-radius: 15px 0px 15px 0px;
+    -webkit-border-radius: 15px 0px 15px 0px;
+}
+#button:hover{
+    display: inline-block;
+    padding: 12px;
+    background-color: #F37439;
+    color: black;
+    font-family: Helvetica, sans-serif;
+    border: 1px solid black;
+    text-decoration: none;
+    border-radius: 0px 15px 0px 15px;
+    -moz-border-radius: 0px 15px 0px 15px;
+    -webkit-border-radius: 0px 15px 0px 15px;
+}
+#menu{
+    clear: both;
+    height: auto;
+    margin: 0px auto;
+    overflow: hidden;
+    background-color: #F37439;
+    padding: 8px;
+}
+ul{
+   padding: 6px;
+   margin: auto;
+   background-color: #F37439;
+   position: relative;
+    left: 25%;
+}
+li{
+    display: inline;
+    background-color: #F37439;
+}
+li a{
+    font-size: 120%;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    color: black;
+    padding: 20px;
+}
+li a:hover{
+    font-size: 120%;
+    font-family: Helvetica, sans-serif;
+    text-decoration: none;
+    color: #fff;
+    background-color: #414848;
+}
