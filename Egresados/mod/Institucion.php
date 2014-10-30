@@ -9,7 +9,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 </head>
 
 
-<button class ="btn" id= "atras" type="button" onclick="javascript: location.href='../Menu.php'">Regresar</button>
+<button class ="btn" id= "atras" type="button" onclick="javascript: location.href='../tool/Menu.php'">Regresar</button>
 
 
 <body>

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['usuario'])){
-    header('Location: Menu.php');
+    header('Location: tool/Menu.php');
 }
 ?>
 <!DOCTYPE html>
