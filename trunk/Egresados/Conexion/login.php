@@ -15,7 +15,7 @@ if(isset($user)  && isset($pass)){
         session_start();
         $_SESSION['usuario'] = $user;
         $_SESSION['pass'] = $pass;
-        header('Location: ../Menu.php');
+        header('Location: ../tool/Menu.php');
     }
     else{
         echo '<div style="float: left;"><a style="font-size: 200%;

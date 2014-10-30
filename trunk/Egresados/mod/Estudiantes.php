@@ -9,7 +9,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 </head>
 
 
-<button class ="btn" id= "atras" type="button" onclick="javascript: location.href='../Menu.php'">Regresar</button>
+<button class ="btn" id= "atras" type="button" onclick="javascript: location.href='../tool/Menu.php'">Regresar</button>
 
 
 <body>
@@ -22,6 +22,7 @@ $host = "localhost";
 $usuario ="root";
 $clave = "1234";
 
+
 require '../tool/ceSQL.php';
 require '../tool/ceGrid.php';
 
@@ -33,7 +34,7 @@ $dg->setQuery("EE01COCN,EE05CEDU,EE02NOES,EE03PAPE,EE04SAPE","ee01estegr");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='mt01.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addStudents.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE01COCN', 'Carnet');
