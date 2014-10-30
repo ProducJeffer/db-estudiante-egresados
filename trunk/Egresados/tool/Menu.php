@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Menú de amigos</title>
+        <title>Menú del proyecto</title>
         <link rel="stylesheet" type="text/css" href="../css/menuStyle.css"/>
     </head>
     <body>

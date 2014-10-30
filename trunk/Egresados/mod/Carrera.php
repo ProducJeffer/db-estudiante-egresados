@@ -32,7 +32,7 @@ $dg->setQuery("EE24COCR,EE25NOCR","ee03crrera");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='mt01.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addCareer.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE24COCR', 'Código carrera');
