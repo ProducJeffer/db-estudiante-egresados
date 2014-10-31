@@ -1,5 +1,5 @@
 <?php
-require '../Conexion/cred.php';
+require '../../Conexion/cred.php';
 	$carnet =  $_REQUEST['Carnet'];
         $cedula = $_REQUEST['Cedula'];
         $nombre = $_REQUEST['nombre'];

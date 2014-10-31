@@ -32,7 +32,7 @@ $dg->setQuery("EE28COES,EE29ENES,EE30FEIN,EE31FEFN,EE32PRES,EE33COCN","ee02estdi
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='mt01.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addStudy.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE28COES', 'Código estudio');

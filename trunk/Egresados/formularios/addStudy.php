@@ -1,66 +1,70 @@
 <?php 
 include  "./../protected.php"; /*Valida el inico de sesion*/
 ?>
-
 <!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Agregar Estudiante egresado</title>
+  <title>Agregar Estudios del estudiante</title>
   <link rel="stylesheet" type="text/css" href="../css/main.css"/>
   <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
 </head>
 <body>
-    <a class="btn" href="../mod/Estudiantes.php">Lista de Estudiantes</a>
+    <a class="btn" href="../mod/Estudio.php">Lista de Estudios</a>
     <div id="content-mt">
         <div id="div01"  class="curved" >
-            <form name="Reg_academico" method="POST" action="../acciones/Inserts/InsertStudent.php"  id="form-pro" onsubmit="return validar()" class="style" >
+            <form name="Reg_academico" method="POST" action="../acciones/Inserts/InsertStudy.php"  id="form-pro" onsubmit="return validar()" class="style" >
 <table id="tab01">
 	<tr align="center">
      <div id="error"></div>
                     <tr>
-                        <td>Estudiante egresado</td>
+                        <td>Estudios de los estudiantes</td>
                     </tr>
                     <tr>
                         <td><label>
-                                <input type="text" placeholder="Ingrese el carnet" name="Carnet" id="Carnet" value = ""  maxlength="50" required/> 
+                                <input type="text" placeholder="Ingrese el código" name="coes" id="coes" value = ""  maxlength="50" required/> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese la cédula" name="Cedula" id="Cedula" value = ""  maxlength="50" required/> 
+                                <textarea type="text" placeholder="Ingrese una breve descripcion del enfasís" name="enfasis" id="enfasis" maxlenght="300" ></textarea>
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el nombre" name="nombre" id="nombre" value = ""  maxlength="50" /> 
+                           <input type="date" placeholder="Ingrese la fecha de inicio" name="fecIni" id="fecIni" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el primer apellido" name="papellido" id="papellido" value = ""  maxlength="50" /> 
+                           <input type="date" tittle="Ingrese la fecha de salida" placeholder="Ingrese de egreso" name="fecFin" id="fecFin" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el segundo apellido" name="sapellido" id="sapellido" value = ""  maxlength="50" /> 
+                           <input type="text" placeholder="Ingrese el promedio sacado" name="prom" id="prom" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el código de estudio" name="coes" id="coes" value = ""  maxlength="50" /> 
+                           <input type="text" placeholder="Ingrese el carnet del estudiante" name="carnet" id="carnet" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el código de trabajo" name="cotr" id="cotr" value = ""  maxlength="50" /> 
+                           <input type="text" placeholder="Ingrese el código de grado logrado" name="codigog" id="codigog" value = ""  maxlength="50" /> 
+                       </label></td>
+                   </tr>
+                   <tr>
+                        <td><label>
+                           <input type="text" placeholder="Ingrese el código de carrera" name="codigoc" id="codigoc" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <td></td>     
                    <td><label>
                        <input type="submit" name="Agregar_Btn" class="btn-m" id="Agregar_Btn" value="Agregar" />
                    </label></td>
-               </tr>		
+               </tr>
            </table> 
        </form>
    </div>
@@ -72,7 +76,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 
     function validar() {
         //obteniendo el valor que se puso en el campo text del formulario
-        val = document.getElementById("Carnet").value;
+        val = document.getElementById("coes").value;
         //la condición
         if (val.length === 0 || /^\s+$/.test(val)) {
             return false;
@@ -84,11 +88,11 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <script type="text/javascript">
     
     $(function(){
-        $("#Carnet").focus();
+        $("#coes").focus();
     $("#form-pro").submit(function(e){
         e.preventDefault();
     var form_data= {    
-           datos:$("#Carnet").val();
+           datos:$("#coes").val();
         };
 
         $.ajax({

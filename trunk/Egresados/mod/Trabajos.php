@@ -28,15 +28,16 @@ $dbase = new ceMySQLAdap($host,$usuario, $clave,"db_proyectoegresados");
 
 $dg = new ceDataGrid($dbase); 
 
-$dg->setQuery("EE36COGR,EE37NOGR","ee04grado");
+$dg->setQuery("EE08COTR,EE10COPU,EE11COIN","ee06trabjo");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='../formularios/addGrade.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addJob.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
-$dg->setColumnHeader('EE36COGR', 'Código grado');
-$dg->setColumnHeader('EE37NOGR', 'Grado');
+$dg->setColumnHeader('EE08COTR', 'Código trabajo');
+$dg->setColumnHeader('EE10COPU', 'Código puesto');
+$dg->setColumnHeader('EE11COIN', 'Código institución');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");

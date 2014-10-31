@@ -1,50 +1,65 @@
 <?php 
 include  "./../protected.php"; /*Valida el inico de sesion*/
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Agregar Carrera del estudiante</title>
+  <title>Agregar las instituciones de estudiantes</title>
   <link rel="stylesheet" type="text/css" href="../css/main.css"/>
   <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
 </head>
 <body>
-    <a class="btn" href="../mod/Carrera.php">Lista de Carreras</a>
+    <a class="btn" href="../mod/Institucion.php">Lista de instituciones</a>
     <div id="content-mt">
         <div id="div01"  class="curved" >
-            <form name="Reg_academico" method="POST" action="../acciones/Inserts/InsertCareer.php"  id="form-pro" onsubmit="return validar()" class="style" >
+            <form name="Reg_academico" method="POST" action="../acciones/Inserts/InsertIns.php"  id="form-pro" onsubmit="return validar()" class="style" >
 <table id="tab01">
 	<tr align="center">
      <div id="error"></div>
                     <tr>
-                        <td>Carrera del estudiante</td>
+                        <td>Grados de los estudiantes</td>
                     </tr>
                     <tr>
                         <td><label>
-                                <input type="text" placeholder="Ingrese el código de carrera" name="codigo" id="codigo" value = ""  maxlength="50" required/> 
+                                <input type="text" placeholder="Ingrese el código" name="codigoIns" id="codigoIns" value = ""  maxlength="50" required/> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el nombre" name="nombreCarrera" id="nombreCarrera" value = ""  maxlength="50" required/> 
+                           <input type="text" placeholder="Ingrese nombre" name="nombreIns" id="nombreIns" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el código de la universidad" name="codigoInstitución" id="codigoInstitucion" value = ""  maxlength="50" /> 
+                           <input type="text" placeholder="Ingrese la sede" name="sede" id="sede" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <tr>
                         <td><label>
-                           <input type="text" placeholder="Ingrese el código de estudio" name="codigoEstudio" id="codigoEstudio" value = ""  maxlength="50" /> 
+                           <input type="text" placeholder="Ingrese el campus" name="campus" id="campus" value = ""  maxlength="50" /> 
+                       </label></td>
+                   </tr>
+                   <tr>
+                        <td><label>
+                                <textarea type="text" placeholder="Ingrese brevemente la dirección de la institución" maxlength="300" name="direccion" id="direccion"></textarea>
+                        </label></td>
+                   </tr>
+                   <tr>
+                        <td><label>
+                           <input type="text" placeholder="Ingrese el código de trabajo" name="cotr" id="cotr" value = ""  maxlength="50" /> 
+                       </label></td>
+                   </tr>
+                   <tr>
+                        <td><label>
+                           <input type="text" placeholder="Ingrese el código de carrera" name="codc" id="codc" value = ""  maxlength="50" /> 
                        </label></td>
                    </tr>
                    <td></td>     
                    <td><label>
                        <input type="submit" name="Agregar_Btn" class="btn-m" id="Agregar_Btn" value="Agregar" />
                    </label></td>
-               </tr>		
+               </tr>
            </table> 
        </form>
    </div>
@@ -56,7 +71,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 
     function validar() {
         //obteniendo el valor que se puso en el campo text del formulario
-        val = document.getElementById("codigo").value;
+        val = document.getElementById("codigoIns").value;
         //la condición
         if (val.length === 0 || /^\s+$/.test(val)) {
             return false;
@@ -68,11 +83,11 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <script type="text/javascript">
     
     $(function(){
-        $("#codigo").focus();
+        $("#codigoIns").focus();
     $("#form-pro").submit(function(e){
         e.preventDefault();
     var form_data= {    
-           datos:$("#codigo").val();
+           datos:$("#codigoIns").val();
         };
 
         $.ajax({
@@ -84,7 +99,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
                
 
                           
-                     $("#Carnet").val("");
+                     $("#codigoIns").val("");
                
                     $("#error").html(responde);
             }
@@ -95,3 +110,4 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 </script>
 
 </html>
+
