@@ -1,5 +1,5 @@
 <?php
-require '../Conexion/cred.php';
+require '../../Conexion/cred.php';
 	$codCarrera =  $_REQUEST['codigo'];
         $nombCarrera = $_REQUEST['nombreCarrera'];
         $codInstitucion = $_REQUEST['codigoInstitución'];

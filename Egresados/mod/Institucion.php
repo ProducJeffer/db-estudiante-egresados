@@ -32,7 +32,7 @@ $dg->setQuery("EE17COIN,EE18NOIN,EE19NOSD,EE20NOCP,EE21DINS","ee05instcn");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='mt01.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addInstitution.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE17COIN', 'Código institución');
