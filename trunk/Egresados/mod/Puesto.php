@@ -6,6 +6,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <link href="../css/ceGrid.css" rel="stylesheet" type="text/css">
 <link href="../css/main.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
+<title>Lista de Puestos</title>
 </head>
 
 
@@ -32,7 +33,7 @@ $dg->setQuery("EE12COPU,EE13NOPU,EE14NODE,EE15TIOP","ee07puesto");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='mt01.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addWorkStation.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE12COPU', 'Código puesto');
