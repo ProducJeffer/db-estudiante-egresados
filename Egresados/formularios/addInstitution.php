@@ -18,7 +18,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 	<tr align="center">
      <div id="error"></div>
                     <tr>
-                        <td>Grados de los estudiantes</td>
+                        <td>Instituciones de los estudiantes</td>
                     </tr>
                     <tr>
                         <td><label>
