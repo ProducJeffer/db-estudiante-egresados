@@ -6,7 +6,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <link href="../css/ceGrid.css" rel="stylesheet" type="text/css">
 <link href="../css/main.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>Lista de Carreras de los estudiantes</title>
+<title>Lista de Usuarios Registrados</title>
 </head>
 
 
@@ -29,15 +29,15 @@ $dbase = new ceMySQLAdap($host,$usuario, $clave,"db_proyectoegresados");
 
 $dg = new ceDataGrid($dbase); 
 
-$dg->setQuery("EE24COCR,EE25NOCR","ee03crrera");
+$dg->setQuery("EE39CDUS,EE40NOUS", "ee08usuario");
 
 $dg->allowFilters();
 
-$dg->showCreateButton("href='../formularios/addCareer.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addUser.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
-$dg->setColumnHeader('EE24COCR', 'Código carrera');
-$dg->setColumnHeader('EE25NOCR', 'Nombre');
+$dg->setColumnHeader('EE39CDUS', 'Usuario');
+$dg->setColumnHeader('EE40NOUS', 'Nombre de usuario');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");

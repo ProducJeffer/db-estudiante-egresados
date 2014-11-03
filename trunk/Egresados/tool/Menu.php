@@ -19,6 +19,12 @@
 <div id='cssmenu'>
     
 <ul>
+    <li class='active has-sub'><a href=''><span>Usuarios</span></a>
+      <ul>
+          <li class='last'><a href='../formularios/addUser.php'><span>Registrar usuario</span></a>
+          <li class='last'><a href='../mod/Usuarios.php'><span>Lista de usuarios</span></a>  
+      </ul>
+   </li>
    <li><a href='../mod/Estudiantes.php'><span>Estudiantes</span></a></li>
    <li><a href='../mod/Estudio.php'><span>Estudios</span></a></li>
    <li><a href='../mod/Carrera.php'><span>Carreras</span></a></li>
