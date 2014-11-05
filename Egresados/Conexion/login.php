@@ -2,7 +2,7 @@
 require '../Conexion/cred.php';
 
 $user = filter_input(INPUT_POST, 'nombreUsuario');
-$pass = filter_input(INPUT_POST, 'password');
+$pass = md5(filter_input(INPUT_POST, 'password'));
 
 if(isset($user)  && isset($pass)){
     $conn = mysql_connect($server, $usuario, $password);
