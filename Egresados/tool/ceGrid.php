@@ -77,20 +77,24 @@ class ceDataGrid
 	{
 		$this->_db = $_db;
 
-		if (empty($image_path))
-			$this->image_path = '../img/';
-		else
+		if (empty($image_path)){
+                    $this->image_path = '../img/';
+                }
+		else{
 			$this->image_path = $image_path;
+                }
 
 		$page = (isset($_GET['page'])) ? (int) $_GET['page'] : 0; // Page number
 		$order = (isset($_GET['order'])) ? $_GET['order'] : ''; // Order clause
 		$filter = (isset($_GET['filter'])) ? $_GET['filter'] : ''; // Filter clause
 
 		// Set the limit
-		if (empty($page) or $page <= 0)
+		if (empty($page) or $page <= 0){
 			$this->setLimit(0, $this->results_per_page);
-		else
+                }
+		else{
 			$this->page = $page;
+                }
 
 		// Set the order cech 2012****
 		if ($order)
@@ -373,20 +377,23 @@ class ceDataGrid
 		if (is_array($act))
 		{
 			// Loop through each passed param and replace variables where necessary
-			foreach ($act as $key => $value)
+			foreach ($act as $key => $value){
 				$act[$key] = $this->parseVariables($row, $value);
+                        }
 
 			return $act;
 		}
 
 		// %_P% is an alias for the primary key, replace it with the primary key
-		if ($this->primary)
+		if ($this->primary){
 			$act = str_replace('%_P%', '%' . $this->primary . '%', $act);
+                }
 
 		preg_match_all("/%([A-Za-z0-9_ \-]*)%/", $act, $vars);
 
-		foreach($vars[0] as $v)
+		foreach($vars[0] as $v){
 			$act = str_replace($v, $row[str_replace('%', '', $v)], $act);
+                }
 
 		return $act;
 	}
@@ -400,10 +407,12 @@ class ceDataGrid
 	*/
 	private function parseLinkAction($action, $action_type)
 	{
-		if ($action_type == self::TYPE_ONCLICK)
+		if ($action_type == self::TYPE_ONCLICK){
 			$action = 'href="javascript:;" onclick="' . $action . '"';
-		else
+                }
+		else{
 			$action = 'href="' . $action . '"';
+                }
 
 		return $action;
 	}
@@ -427,8 +436,9 @@ class ceDataGrid
 	*/
 	public static function isAjaxUsed()
 	{
-		if (!empty($_GET['useajax']) and $_GET['useajax'] == 'true')
+		if (!empty($_GET['useajax']) and $_GET['useajax'] == 'true'){
 			return true;
+                }
 
 		return false;
 	}
@@ -440,8 +450,9 @@ class ceDataGrid
 	private function buildHeader()
 	{
 		// If entire header is hidden, skip all together
-		if ($this->hide_header)
+		if ($this->hide_header){
 			return;
+                }
 
 		echo '<thead><tr>';
 
@@ -474,26 +485,32 @@ class ceDataGrid
 			}
 
 			// Check for header caption overrides
-			if (array_key_exists($t, $this->header))
+			if (array_key_exists($t, $this->header)){
 				$header = $this->header[$t];
-			else
+                        }
+			else{
 				$header = $t;
+                        }
 
-			if ($this->hide_order)
+			if ($this->hide_order){
 				echo '<td class="tbl-header">' . $header; // Prevent the user from changing order
+                        }
 			else {
-				if ($this->order and $this->order['Column'] == $t)
+				if ($this->order and $this->order['Column'] == $t){
 					$order = ($this->order['Order'] == self::ORDER_ASC)
 										? self::ORDER_DESC
 										: self::ORDER_ASC;
-				else
+                                }
+				else{
 					$order = self::ORDER_ASC;
+                                }
 
 				echo '<td class="tbl-header"><a href="javascript:;" onclick="tblSetOrder(\'' . $t . '\', \'' . $order . '\')">' . $header . "</a>";
 
 				// Show the user the order image if set
-				if ($this->order and $this->order['Column'] == $t)
+				if ($this->order and $this->order['Column'] == $t){
 					echo '&nbsp;<img src="' . $this->image_path . 'sort_' . strtolower($this->order['Order']) . '.gif" class="tbl-order">';
+                                }
 			}
 
 			// Add filters if allowed and only if the column type is not "special"
@@ -543,25 +560,29 @@ class ceDataGrid
 	private function buildFooter($shown, $first = 0, $last = 0)
 	{
 		// Skip adding the footer if it is hidden
-		if ($this->hide_footer)
+		if ($this->hide_footer){
 			return;
+                }
 
 		$pages = ceil($this->row_count / $this->results_per_page); // Total number of pages
 
 		echo '<tfoot><tr class="tbl-footer"><td class="tbl-nav" colspan="' . $this->column_count . '"><table width="100%" class="tbl-footer"><tr><td width="33%" class="tbl-found">Encontrados <em>' . $this->row_count . '</em> resultados';
 
-		if ($this->row_count > 0)
+		if ($this->row_count > 0){
 			echo ', Viendo <em>' . $first . '</em> de <em>' . $last . '</em>';
+                }
 
 		echo '</td><td wdith="33%" class="tbl-pages">';
 
 		// Handle results that span multiple pages
 		if ($this->row_count > $this->results_per_page)
 		{
-			if ($this->page > 1)
+			if ($this->page > 1){
 				echo '<a href="javascript:;" onclick="tblSetPage(1)"><img src="' . $this->image_path . 'arrow_first.gif" class="tbl-arrows" alt="&lt;&lt;" title="Primera Pagina"></a><a href="javascript:;" onclick="tblSetPage(' . ($this->page - 1) . ')"><img src="' . $this->image_path . 'arrow_left.gif" class="tbl-arrows" alt="&lt;" title="Anterior"></a>';
-			else
+                        }
+			else{
 				echo '<img src="' . $this->image_path . 'arrow_first_disabled.gif" class="tbl-arrows" alt="&lt;&lt;" title="Primera Pagina"><img src="' . $this->image_path . 'arrow_left_disabled.gif" class="tbl-arrows" alt="&lt;" title="Anterior">';
+                        }
 
 			// Special thanks to ionut for this next few lines
 			$startpage = ($this->page > 10)
@@ -575,16 +596,20 @@ class ceDataGrid
       // Only display a portion of the selectable pages
       for ($i = $startpage; $i <= $endpage; $i++)
 			{
-				if ($i == $this->page)
+				if ($i == $this->page){
 					echo '&nbsp;<span class="page-selected">' . $i . '</span>&nbsp;';
-				else
+                                }
+				else{
 					echo '&nbsp;<a href="javascript:;" onclick="tblSetPage(' . $i . ')">' . $i . '</a>&nbsp;';
+                                }
 			}
 
-			if ($this->page < $pages)
+			if ($this->page < $pages){
 				echo '<a href="javascript:;" onclick="tblSetPage(' . ($this->page + 1) . ')"><img src="' . $this->image_path . 'arrow_right.gif" class="tbl-arrows" alt="&gt;" title="Siguiente"></a><a href="javascript:;" onclick="tblSetPage(' . $pages . ')"><img src="' . $this->image_path . 'arrow_last.gif" class="tbl-arrows" alt="&gt;&gt;" title="Ultima Pagina"></a>';
-			else
+                        }
+			else{
 				echo '<img src="' . $this->image_path . 'arrow_right_disabled.gif" class="tbl-arrows" alt="&gt;" title="Siguiente"><img src="' . $this->image_path . 'arrow_last_disabled.gif" class="tbl-arrows" alt="&gt;&gt;" title="anterio">';
+                        }
 		}
 
 		echo '</td><td width="33%" class="tbl-page">';
@@ -605,8 +630,9 @@ class ceDataGrid
 					echo '>' . $x . '</option>';
 				}
 				echo '</select>';
-			} else
+			} else{
 				echo $this->page; // Just write the page number, nothing to fancy
+                        }
 
 			echo ' de ' . $pages;
 		}
@@ -625,8 +651,9 @@ class ceDataGrid
 			if (count($this->controls) > 0)
 			{
 				echo '<td class="tbl-controls">';
-				foreach ($this->controls as $ctl)
+				foreach ($this->controls as $ctl){
 					echo $this->parseVariables($row, $ctl);
+                                }
 				echo '</td>';
 			}
 	}
@@ -642,36 +669,45 @@ class ceDataGrid
 
 		// FILTER
 		$filter_query = '';
-		if ($this->select_where)
+		if ($this->select_where){
 			$filter_query .= "(" . $this->select_where . ")";
+                }
 
 		if ($this->allow_filters and $this->filter)
 		{
-			if (!strstr($this->filter['Value'], '%'))
+			if (!strstr($this->filter['Value'], '%')){
 				$filter_value = '%' . $this->filter['Value'] . '%';
-			else
+                        }
+			else{
 				$filter_value = $this->filter['Value'];
+                        }
 
-			if ($this->select_where)
+			if ($this->select_where){
 				$filter_query = $filter_query . " AND ";
+                        }
 
 			$filter_query .= "(`" . $this->filter['Column'] . "` LIKE '" . $filter_value . "')";
 		}
 		
-		if ($filter_query)
+		if ($filter_query){
 			$filter = 'WHERE ' . $filter_query;
+                }
 
 		// ORDER
-		if ($this->order)
+		if ($this->order){
 			$order = "ORDER BY `" . $this->order['Column'] . "` " . $this->order['Order'];
-		else
+                }
+		else{
 			$order = '';
+                }
 
 		// LIMIT
-		if ($this->limit)
+		if ($this->limit){
 			$limit = "LIMIT " . $this->limit['Low'] . ", " . $this->limit['High'];
-		else
+                }
+		else{
 			$limit = '';
+                }
 
 		$query = 'SELECT ' . $this->select_fields . ' FROM ' . $this->select_table . ' ' . $filter;
 
@@ -696,12 +732,14 @@ class ceDataGrid
 		echo '<form action="#" name="dg" id="dg">';
 
 		// Output the create button
-		if ($this->create_button)
+		if ($this->create_button){
 			echo '<span class="tbl-create"><a ' . $this->create_button['Action'] . ' title="' . $this->create_button['Text'] . '"><img src="' . $this->image_path . $this->img_create . '" class="tbl-create-image">' . $this->create_button['Text'] . '</a></span>';
+                }
 
 		// Output the reset button
-		if ($this->reset_button)
+		if ($this->reset_button){
 			echo '<span class="tbl-reset"><a href="javascript:;" onclick="tblReset()" title="' . $this->reset_button .'"><img src="' . $this->image_path . $this->img_reset . '" class="tbl-reset-image">' . $this->reset_button .'</a></span>';
+                }
 
 		echo '<table class="tbl">';
 
@@ -709,8 +747,9 @@ class ceDataGrid
 
 		echo '<tbody>';
 
-		if ($this->row_count == 0)
+		if ($this->row_count == 0){
 			echo '<tr><td colspan="' . $this->column_count . '" class="tbl-noresults">' . self::TXT_NORESULTS . '</td></tr>';
+                }
 		else {
 			$i = 0; $first = 0; $last = 0;
 
@@ -719,8 +758,9 @@ class ceDataGrid
 				echo '<tr class="tbl-row tbl-row-' . (($i % 2) ? 'odd' : 'even'); // Switch up the bgcolors on each row
 
 				// Handle row selects
-				if ($this->row_select)
+				if ($this->row_select){
 					echo ' tbl-row-highlight" onclick="' . $this->parseVariables($row, $this->row_select);
+                                }
 
 				echo '">';
 
@@ -729,14 +769,17 @@ class ceDataGrid
 							: $i + 1 + (($this->page - 1) * $this->results_per_page);
 
 				$last = $line; // Last line
-				if ($first == 0)
+				if ($first === 0){
 					$first = $line; // First line
+                                }
 
-				if ($this->show_row_number)
+				if ($this->show_row_number){
 					echo '<td class="tbl-row-num">' . $line . '</td>';
+                                }
 
-				if ($this->show_checkboxes)
+				if ($this->show_checkboxes){
 					echo '<td align="center"><input type="checkbox" class="tbl-checkbox" id="checkbox" name="tbl-checkbox" value="' . $row[$this->primary] . '"></td>';
+                                }
 
 				foreach ($row as $key => $value)
 				{
@@ -752,20 +795,24 @@ class ceDataGrid
 						switch ($type)
 						{
 							case self::TYPE_ONCLICK:
-								if ($value)
+								if ($value){
 									$value = '<a href="javascript:;" onclick="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
 								break;
 
 							case self::TYPE_HREF:
-								if ($value)
+								if ($value){
 									$value = '<a href="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
 								break;
 
 							case self::TYPE_DATE:
-								if ($criteria_2 == true)
+								if ($criteria_2 == true){
 									$value = date($criteria, strtotime($value));
-								else
+                                                                }
+								else{
 									$value = date($criteria, $value);
+                                                                }
 								break;
 
 							case self::TYPE_IMAGE:
@@ -777,21 +824,23 @@ class ceDataGrid
 								break;
 
 							case self::TYPE_CHECK:
-								if ($value == '1' or $value == 'yes' or $value == 'true' or ($criteria != '' and $value == $criteria))
+								if ($value == '1' or $value == 'yes' or $value == 'true' or ($criteria != '' and $value == $criteria)){
 									$value = '<img src="' . $this->image_path . 'check.gif">';
+                                                                }
 								break;
 
 							case self::TYPE_PERCENT:
-								if ($criteria == true)
+								if ($criteria == true){
 									$value *= 100; // Value is in decimal format
-
+                                                                }
 								$value = round($value); // Round to the nearest decimal
 
 								$value .= '%';
 
 								// Apply a bar if an array is supplied via criteria_2
-								if (is_array($criteria_2))
+								if (is_array($criteria_2)){
 									$value = '<div style="background: ' . $criteria_2['Back'] . '; width: ' . $value . '; color: ' . $criteria_2['Fore'] . ';">' . $value . '</div>';
+                                                                }
 								break;
 
 							case self::TYPE_DOLLAR:
@@ -803,10 +852,12 @@ class ceDataGrid
 								break;
 
 							case self::TYPE_FUNCTION:
-								if (is_array($criteria_2))
+								if (is_array($criteria_2)){
 									$value = call_user_func_array($criteria, $this->parseVariables($row, $criteria_2));
-								else
+                                                                }
+								else{
 									$value = call_user_func($criteria, $this->parseVariables($row, $criteria_2));
+                                                                }
 								break;
 
 							default:
@@ -843,8 +894,9 @@ class ceDataGrid
 		self::printJavascript();
 
 		// If no responce script is set, use the current script
-		if (empty($responce))
+		if (empty($responce)){
 			$responce = $_SERVER['PHP_SELF'];
+                }
 
 		echo "<script type=\"text/javascript\">\n";
 		echo "var xmlHttp\n";

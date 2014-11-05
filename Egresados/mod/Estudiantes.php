@@ -45,7 +45,7 @@ $dg->setColumnHeader('EE04SAPE', 'Segundo apellido');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='delete.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudiante.php?id=%EE01COCN%'");
 
 $dg->showReset("Refrescar");
 $dg->printTable();
