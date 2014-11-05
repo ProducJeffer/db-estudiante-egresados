@@ -78,7 +78,7 @@ class ceDataGrid
 		$this->_db = $_db;
 
 		if (empty($image_path))
-			$this->image_path = 'img/';
+			$this->image_path = '../img/';
 		else
 			$this->image_path = $image_path;
 
@@ -795,7 +795,7 @@ class ceDataGrid
 								break;
 
 							case self::TYPE_DOLLAR:
-								$value = '¢' . number_format($value, 2);
+								$value = 'ï¿½' . number_format($value, 2);
 								break;
 
 							case self::TYPE_CUSTOM:
