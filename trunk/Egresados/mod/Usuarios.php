@@ -41,7 +41,7 @@ $dg->setColumnHeader('EE40NOUS', 'Nombre de usuario');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='delete.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteUsuario.php?id=%EE39CDUS%'");
 
 $dg->showReset("Refrescar");
 $dg->printTable();

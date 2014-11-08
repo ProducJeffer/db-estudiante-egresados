@@ -1,16 +1,42 @@
 <?php
- require '../../Conexion/cred.php';
-   $EE39CDUS= $_GET["id"];
- 	$SQLstr = "delete
-from db_proyectoegresados.ee08usuario
-where EE39CDUS = '$EE39CDUS';";
-	
-    if (!$conectarBD->query($SQLstr))
-    {
-        echo " Problemas al relizar el delete: (" . $conectarBD->error . ") " . $conectarBD->error;
-    }
- 
-    $conectarBD->close();
-	header("location:http:Usuarios.php");
-return;
-?>
+require '../../Conexion/cred.php';
+   $idCareer = $_GET["id"];
+   $sqlQuery = "DELETE FROM ee08usuario WHERE EE39CDUS = '" .$idCareer. "'";
+   $conn = mysql_connect($server, $usuario, $password);
+    mysql_select_db($database, $conn);
+    if (!$conn) {
+        echo '<div style="float: left;"><a style="font-size: 200%;
+            text-decoration: none;
+            padding: 15px;
+            background-color: lightblue;
+            color: white;
+            font-family: Helvetica, sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+        " href="../../index.php">Regresar</a></div>';
+    die("La conexión fallo: " .mysqli_connect_error());
+}
+if (mysql_query($sqlQuery)) {
+    echo '<div style="float: left;"><a style="font-size: 200%;
+            text-decoration: none;
+            padding: 15px;
+            background-color: lightblue;
+            color: white;
+            font-family: Helvetica, sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+        " href="../../index.php">Regresar</a></div>';
+    echo "El usuario se ha eliminado correctamente";
+} else {
+    echo '<div style="float: left;"><a style="font-size: 200%;
+            text-decoration: none;
+            padding: 15px;
+            background-color: lightblue;
+            color: white;
+            font-family: Helvetica, sans-serif;
+            border-radius: 5px;
+            border: 1px solid black;
+        " href="../../index.php">Regresar</a></div>';
+    echo "Error al eliminar el usuario: " .mysql_connect_eror();
+}
+mysql_close();
