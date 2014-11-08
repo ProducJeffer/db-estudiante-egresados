@@ -41,7 +41,7 @@ $dg->setColumnHeader('EE11COIN', 'Código institución');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='delete.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteTrabajo.php?id=%EE08COTR%'");
 
 $dg->showReset("Refrescar");
 $dg->printTable();
