@@ -42,6 +42,13 @@ class ceDataGrid
 	public $img_delete = 'delete.png';
 	public $img_create = 'create.png';
 	public $img_reset = 'reset.png';
+        public $img_estudiante = 'estudiante.gif';
+        public $img_trabajor = 'trabajo.jpg';
+        public $img_estudio = 'estudio.png';
+        public $img_privilegios = 'private_.png';
+        public $img_grado = 'grado.png';
+        public $img_carrera = 'carrera.png';
+        public $img_puesto = 'silla.png';
 
 
 	// Configuration constants
@@ -61,6 +68,17 @@ class ceDataGrid
 	const TYPE_FUNCTION = 10;
 	const ORDER_DESC = 'DESC';
 	const ORDER_ASC = 'ASC';
+        
+        //access to catalogs
+        const Go_Job = 1;
+        const Go_Student = 2;
+        const Go_Study = 3;
+        const Go_Grade = 4;
+        const Go_Institution = 5;
+        const Go_WorkStation = 6;
+        const Go_User = 7;
+        const Go_privileges = 8;
+        const Go_Career = 9;
 
 
 	// Default text
@@ -304,7 +322,30 @@ class ceDataGrid
 				break;
 		}
 	}
-
+        public function addItem($type, $action)
+        {
+            switch($type){
+                case self::Go_Job:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_trabajor. '" alt="Trabajo" title="Trabajo" class="tbl-control-image"/></a>';
+                    break;
+                case self::Go_Study:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_estudio. '" alt="Estudio" title="Estudio" class="tbl-control-image"/></a>';
+                    break;
+                case self::Go_privileges:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_privilegios. '" alt="Privilegios" title="Privilegios" class="tbl-control-image"/></a>';
+                    break;
+                case self::Go_Grade:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_grado. '" alt="Grado" title="Grado" class="tbl-control-image"/></a>';
+                    break;
+                case self::Go_Career:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_carrera. '" alt="Carrera" title="Carrera" class="tbl-control-image"/></a>';
+                    break;
+                case self::Go_WorkStation:
+                    $this->controls[] = '<a ' .$action. '><img src="' .$this->image_path. $this->img_puesto. '" alt="Puesto" title="Puesto" class="tbl-control-image"/></a>';
+                    break;
+            }
+            
+        }
 	/**
 	* Adds a custom control to a row
 	*

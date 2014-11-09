@@ -44,6 +44,8 @@ $dg->setColumnHeader('EE21DINS', 'Dirección');
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
 $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteInstitucion.php?id=%EE17COIN%'");
+$dg->addItem(ceDataGrid::Go_Job, "href='../mod/Trabajos.php'");
+$dg->addItem(ceDataGrid::Go_Career, "href='../mod/Carrera.php'");
 
 $dg->showReset("Refrescar");
 $dg->printTable();
