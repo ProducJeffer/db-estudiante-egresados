@@ -322,6 +322,11 @@ class ceDataGrid
 				break;
 		}
 	}
+        
+        /**
+         * method to add the relationship into catalogs
+         * 
+         */
         public function addItem($type, $action)
         {
             switch($type){

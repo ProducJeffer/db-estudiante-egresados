@@ -18,14 +18,12 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 
 <?php
 
-$host = "localhost";
-$usuario ="root";
-$clave = "1234";
+require '../Conexion/cred.php';
 
 require '../tool/ceSQL.php';
 require '../tool/ceGrid.php';
 
-$dbase = new ceMySQLAdap($host,$usuario, $clave,"db_proyectoegresados");
+$dbase = new ceMySQLAdap($server, $usuario, $password,$database);
 
 $dg = new ceDataGrid($dbase); 
 
