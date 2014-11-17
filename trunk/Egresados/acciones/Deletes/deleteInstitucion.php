@@ -13,7 +13,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Institucion.php">Regresar</a></div>';
     die("La conexión fallo: " .mysqli_connect_error());
 }
 if (mysql_query($sqlQuery)) {
@@ -25,7 +25,7 @@ if (mysql_query($sqlQuery)) {
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Institucion.php">Regresar</a></div>';
     echo "La institución se ha eliminado correctamente";
 } else {
     echo '<div style="float: left;"><a style="font-size: 200%;
@@ -36,7 +36,7 @@ if (mysql_query($sqlQuery)) {
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Institucion.php">Regresar</a></div>';
     echo "Error al eliminar la institución: " .mysql_connect_eror();
 }
 mysql_close();
