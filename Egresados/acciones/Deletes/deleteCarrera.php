@@ -16,7 +16,7 @@ if (mysql_query($sqlQuery)) {
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Carrera.php">Regresar</a></div>';
     echo "La carrera se ha eliminado correctamente";
 } else {
     echo "Error al eliminar la carrera: " .mysql_connect_eror();

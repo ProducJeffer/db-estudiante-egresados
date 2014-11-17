@@ -16,7 +16,7 @@ if (mysql_query($sqlQuery)) {
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Grado.php">Regresar</a></div>';
     echo "El grado se ha eliminado correctamente";
 } else {
     echo "Error al eliminar el grado: " .mysql_connect_eror();
