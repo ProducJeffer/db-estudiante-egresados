@@ -42,7 +42,7 @@ $dg->setColumnHeader('EE33COCN', 'Carnet');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDeletes/deleteEstudios.php?id=%EE28COES%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudios.php?id=%EE28COES%'");
 $dg->addItem(ceDataGrid::Go_Grade, "href='../Relations/RGrado.php?id=%EE28COES%'");
 
 $dg->showReset("Refrescar");

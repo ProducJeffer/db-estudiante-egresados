@@ -41,7 +41,7 @@ $dg->setColumnHeader('EE04SAPE', 'Segundo apellido');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDeletes/deleteEstudiante.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudiante.php?id=%EE01COCN%'");
 $dg->addItem(ceDataGrid::Go_privileges, "href='#'");
 $dg->addItem(ceDataGrid::Go_Job, "href='../Relations/RTrabajo.php?id=%EE01COCN%'");
 $dg->addItem(ceDataGrid::Go_Study, "href='../Relations/REstudio.php?id=%EE01COCN%'");
