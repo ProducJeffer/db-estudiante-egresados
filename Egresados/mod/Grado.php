@@ -38,7 +38,7 @@ $dg->setColumnHeader('EE37NOGR', 'Grado');
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDeletes/deleteGrado.php?id=%EE36COGR%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteGrado.php?id=%EE36COGR%'");
 
 $dg->showReset("Refrescar");
 $dg->printTable();
