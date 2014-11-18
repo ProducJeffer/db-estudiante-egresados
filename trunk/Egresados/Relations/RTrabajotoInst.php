@@ -16,7 +16,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <div id="content">
 
 <?php
-
+$idTrabajoInsti = $_GET['id'];
 require '../Conexion/cred.php';
 
 require '../tool/ceSQL.php';
@@ -28,7 +28,6 @@ $dg = new ceDataGrid($dbase);
 
 $dg->setQuery("EE08COTR,EE10COPU,EE11COIN","ee06trabjo");
 
-$dg->allowFilters();
 
 $dg->showCreateButton("href='../formularios/addJob.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
@@ -44,7 +43,7 @@ $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDe
 $dg->addItem(ceDataGrid::Go_WorkStation, "href='../mod/Puesto.php'");
 
 $dg->showReset("Refrescar");
-$dg->printTableJob();
+$dg->printTableII(ceDataGrid::JobtoI, $idTrabajoInsti);
 ?>
 </div>
 </body>

@@ -1,4 +1,5 @@
 <?php
+require '../Conexion/cred.php';
 /**
  * Provides datagrid control features
  *
@@ -79,6 +80,15 @@ class ceDataGrid
         const Go_User = 7;
         const Go_privileges = 8;
         const Go_Career = 9;
+        
+        
+        //access to query in button
+        const Student = 1;
+        const JobtoS = 2;
+        const JobtoC = 3;
+        const JobtoI = 4;
+        const Grade = 5;
+        const Puesto = 6;
 
 
 	// Default text
@@ -930,6 +940,7 @@ class ceDataGrid
 		echo '</table></form>';
 	}
 
+
 	/**
 	 * Prints out script to handle Ajax data grids
 	 *
@@ -985,4 +996,473 @@ class ceDataGrid
 		echo "function tblReset() { params = '&page=1'; updateTable(); }\n";
 		echo "</script>\n";
 	}
+        
+        
+        
+        //relationship between tables from data base
+        public function printTableII($numberQuery, $id)
+	{
+		// Set the limit
+		$this->setLimit(($this->page - 1) * $this->results_per_page, $this->results_per_page);
+
+		// FILTER
+		$filter_query = '';
+		if ($this->select_where){
+			$filter_query .= "(" . $this->select_where . ")";
+                }
+
+		if ($this->allow_filters and $this->filter)
+		{
+			if (!strstr($this->filter['Value'], '%')){
+				$filter_value = '%' . $this->filter['Value'] . '%';
+                        }
+			else{
+				$filter_value = $this->filter['Value'];
+                        }
+
+			if ($this->select_where){
+				$filter_query = $filter_query . " AND ";
+                        }
+
+			$filter_query .= "(`" . $this->filter['Column'] . "` LIKE '" . $filter_value . "')";
+		}
+		
+		if ($filter_query){
+			$filter = 'WHERE ' . $filter_query;
+                }
+
+		// ORDER
+		if ($this->order){
+			$order = "ORDER BY `" . $this->order['Column'] . "` " . $this->order['Order'];
+                }
+		else{
+			$order = '';
+                }
+
+		// LIMIT
+		if ($this->limit){
+			$limit = "LIMIT " . $this->limit['Low'] . ", " . $this->limit['High'];
+                }
+		else{
+			$limit = '';
+                }
+                
+                switch($numberQuery){
+                    case self::Student:
+                        $query = 'SELECT  b.EE33COCN, a.EE02NOES, b.EE29ENES, b.EE30FEIN, b.EE31FEFN, b.EE32PRES FROM ee01estegr a, ee02estdio b WHERE a.EE01COCN = b.EE33COCN AND a.EE01COCN = ' .$id;
+                        break;
+                    case self::JobtoS:
+                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE07COTR = d.EE08COTR AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU AND a.EE01COCN = ' .$id;
+                        break;
+                    case self::JobtoC:
+                        $query = 'SELECT a.EE01COCN, a.EE02NOES, b.EE29ENES, c.EE37NOGR FROM ee01estegr a, ee02estdio b, ee04grado c WHERE a.EE01COCN = b.EE33COCN AND b.EE34COGR = c.EE36COGR AND b.EE28COES =' .$id;
+                        break;
+                    case self::JobtoI:
+                        $query = 'SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE07COTR = d.EE08COTR AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU AND b.EE17COIN = ' .$id;
+                        break;
+                    case self::Grade:
+                        $query = 'SELECT a.EE01COCN, a.EE02NOES, b.EE29ENES, c.EE37NOGR FROM ee01estegr a, ee02estdio b, ee04grado c WHERE a.EE01COCN = b.EE33COCN AND b.EE34COGR = c.EE36COGR AND b.EE28COES =' .$id;
+                        break;
+                    case self::Puesto:
+                        $query = 'SELECT a.EE01COCN, a.EE02NOES, c.EE25NOCR, d.EE18NOIN FROM ee01estegr a, ee02estdio b, ee03crrera c, ee05instcn d WHERE a.EE06COES = b.EE28COES AND b.EE35COCR = c.EE24COCR AND c.EE26COIN = d.EE17COIN AND d.EE17COIN =' .$id;
+                        break;
+                }
+		
+		// Inform the user of any errors. Commonly caused when a column is specified in the filter or order clause that does not exist
+		$this->result = $this->_db->query($query . ' ' . $order . ' ' . $limit, false);
+		if (!$this->result)
+		{
+			echo '<div style="color: red; font-weight: bold; border: 2px solid red; padding: 10px;">Oops! We ran into a problem while trying to output the table. <a href="javascript:;" onclick="tblReset()">Click here</a> to reset the table or <a href="javascript:;" onclick="alert(\'' . ereg_replace('[\'"]', '', $this->_db->error()) . '\')">here</a> to review the error.</div>';
+			return;
+		}
+
+		// Count the number of rows without the limit clause
+		$this->row_count = (int) $this->_db->selectOneValue('COUNT(*)', $this->select_table, $filter_query); // Old code which does not support large data sets: $this->_db->countRows($query);
+
+		if (!$this->isAjaxUsed())
+		{
+			// Print out required javascript functions
+			$this->printJavascript();
+			echo '<script type="text/javascript">function updateTable() { window.location = "?" + params; }</script>';
+		}
+
+		echo '<form action="#" name="dg" id="dg">';
+
+		// Output the create button
+		if ($this->create_button){
+			echo '<span class="tbl-create"><a ' . $this->create_button['Action'] . ' title="' . $this->create_button['Text'] . '"><img src="' . $this->image_path . $this->img_create . '" class="tbl-create-image">' . $this->create_button['Text'] . '</a></span>';
+                }
+
+		// Output the reset button
+		if ($this->reset_button){
+			echo '<span class="tbl-reset"><a href="javascript:;" onclick="tblReset()" title="' . $this->reset_button .'"><img src="' . $this->image_path . $this->img_reset . '" class="tbl-reset-image">' . $this->reset_button .'</a></span>';
+                }
+
+		echo '<table class="tbl">';
+
+		$this->buildHeader();
+
+		echo '<tbody>';
+
+		if ($this->row_count == 0){
+			echo '<tr><td colspan="' . $this->column_count . '" class="tbl-noresults">' . self::TXT_NORESULTS . '</td></tr>';
+                }
+		else {
+			$i = 0; $first = 0; $last = 0;
+
+			while ($row = $this->_db->fetchAssoc($this->result))
+			{
+				echo '<tr class="tbl-row tbl-row-' . (($i % 2) ? 'odd' : 'even'); // Switch up the bgcolors on each row
+
+				// Handle row selects
+				if ($this->row_select){
+					echo ' tbl-row-highlight" onclick="' . $this->parseVariables($row, $this->row_select);
+                                }
+
+				echo '">';
+
+				$line = ($this->page == 1)
+							? $i + 1
+							: $i + 1 + (($this->page - 1) * $this->results_per_page);
+
+				$last = $line; // Last line
+				if ($first === 0){
+					$first = $line; // First line
+                                }
+
+				if ($this->show_row_number){
+					echo '<td class="tbl-row-num">' . $line . '</td>';
+                                }
+
+				if ($this->show_checkboxes){
+					echo '<td align="center"><input type="checkbox" class="tbl-checkbox" id="checkbox" name="tbl-checkbox" value="' . $row[$this->primary] . '"></td>';
+                                }
+
+				foreach ($row as $key => $value)
+				{
+					// Skip if column is hidden
+					if (in_array($key, $this->hidden))
+						continue;
+
+					// Apply a column type to the value
+					if (array_key_exists($key, $this->type))
+					{
+						list($type, $criteria, $criteria_2) = $this->type[$key];
+
+						switch ($type)
+						{
+							case self::TYPE_ONCLICK:
+								if ($value){
+									$value = '<a href="javascript:;" onclick="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
+								break;
+
+							case self::TYPE_HREF:
+								if ($value){
+									$value = '<a href="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
+								break;
+
+							case self::TYPE_DATE:
+								if ($criteria_2 == true){
+									$value = date($criteria, strtotime($value));
+                                                                }
+								else{
+									$value = date($criteria, $value);
+                                                                }
+								break;
+
+							case self::TYPE_IMAGE:
+								$value = '<img src="' . $this->parseVariables($row, $criteria) . '" id="' . $key . '-' . $i . '">';
+								break;
+
+							case self::TYPE_ARRAY:
+								$value = $criteria[$value];
+								break;
+
+							case self::TYPE_CHECK:
+								if ($value == '1' or $value == 'yes' or $value == 'true' or ($criteria != '' and $value == $criteria)){
+									$value = '<img src="' . $this->image_path . 'check.gif">';
+                                                                }
+								break;
+
+							case self::TYPE_PERCENT:
+								if ($criteria == true){
+									$value *= 100; // Value is in decimal format
+                                                                }
+								$value = round($value); // Round to the nearest decimal
+
+								$value .= '%';
+
+								// Apply a bar if an array is supplied via criteria_2
+								if (is_array($criteria_2)){
+									$value = '<div style="background: ' . $criteria_2['Back'] . '; width: ' . $value . '; color: ' . $criteria_2['Fore'] . ';">' . $value . '</div>';
+                                                                }
+								break;
+
+							case self::TYPE_DOLLAR:
+								$value = '�' . number_format($value, 2);
+								break;
+
+							case self::TYPE_CUSTOM:
+								$value = $this->parseVariables($row, $criteria);
+								break;
+
+							case self::TYPE_FUNCTION:
+								if (is_array($criteria_2)){
+									$value = call_user_func_array($criteria, $this->parseVariables($row, $criteria_2));
+                                                                }
+								else{
+									$value = call_user_func($criteria, $this->parseVariables($row, $criteria_2));
+                                                                }
+								break;
+
+							default:
+								// Invalid column type
+								break;
+							}
+					}
+
+					echo '<td class="tbl-cell">' . $value . '</td>';
+				}
+
+				$this->buildControls($row);
+
+				echo '</tr>';
+
+				$i++;
+			}
+		}
+
+		echo '</tbody>';
+
+		$this->buildFooter($i, $first, $last);
+
+		echo '</table></form>';
+	}
+        
+        public function printTableJob()
+	{
+		// Set the limit
+		$this->setLimit(($this->page - 1) * $this->results_per_page, $this->results_per_page);
+
+		// FILTER
+		$filter_query = '';
+		if ($this->select_where){
+			$filter_query .= "(" . $this->select_where . ")";
+                }
+
+		if ($this->allow_filters and $this->filter)
+		{
+			if (!strstr($this->filter['Value'], '%')){
+				$filter_value = '%' . $this->filter['Value'] . '%';
+                        }
+			else{
+				$filter_value = $this->filter['Value'];
+                        }
+
+			if ($this->select_where){
+				$filter_query = $filter_query . " AND ";
+                        }
+
+			$filter_query .= "(`" . $this->filter['Column'] . "` LIKE '" . $filter_value . "')";
+		}
+		
+		if ($filter_query){
+			$filter = 'WHERE ' . $filter_query;
+                }
+
+		// ORDER
+		if ($this->order){
+			$order = "ORDER BY `" . $this->order['Column'] . "` " . $this->order['Order'];
+                }
+		else{
+			$order = '';
+                }
+
+		// LIMIT
+		if ($this->limit){
+			$limit = "LIMIT " . $this->limit['Low'] . ", " . $this->limit['High'];
+                }
+		else{
+			$limit = '';
+                }
+                
+                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE07COTR = d.EE08COTR AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU';
+                      
+                    
+		
+		// Inform the user of any errors. Commonly caused when a column is specified in the filter or order clause that does not exist
+		$this->result = $this->_db->query($query . ' ' . $order . ' ' . $limit, false);
+		if (!$this->result)
+		{
+			echo '<div style="color: red; font-weight: bold; border: 2px solid red; padding: 10px;">Oops! We ran into a problem while trying to output the table. <a href="javascript:;" onclick="tblReset()">Click here</a> to reset the table or <a href="javascript:;" onclick="alert(\'' . ereg_replace('[\'"]', '', $this->_db->error()) . '\')">here</a> to review the error.</div>';
+			return;
+		}
+
+		// Count the number of rows without the limit clause
+		$this->row_count = (int) $this->_db->selectOneValue('COUNT(*)', $this->select_table, $filter_query); // Old code which does not support large data sets: $this->_db->countRows($query);
+
+		if (!$this->isAjaxUsed())
+		{
+			// Print out required javascript functions
+			$this->printJavascript();
+			echo '<script type="text/javascript">function updateTable() { window.location = "?" + params; }</script>';
+		}
+
+		echo '<form action="#" name="dg" id="dg">';
+
+		// Output the create button
+		if ($this->create_button){
+			echo '<span class="tbl-create"><a ' . $this->create_button['Action'] . ' title="' . $this->create_button['Text'] . '"><img src="' . $this->image_path . $this->img_create . '" class="tbl-create-image">' . $this->create_button['Text'] . '</a></span>';
+                }
+
+		// Output the reset button
+		if ($this->reset_button){
+			echo '<span class="tbl-reset"><a href="javascript:;" onclick="tblReset()" title="' . $this->reset_button .'"><img src="' . $this->image_path . $this->img_reset . '" class="tbl-reset-image">' . $this->reset_button .'</a></span>';
+                }
+
+		echo '<table class="tbl">';
+
+		$this->buildHeader();
+
+		echo '<tbody>';
+
+		if ($this->row_count == 0){
+			echo '<tr><td colspan="' . $this->column_count . '" class="tbl-noresults">' . self::TXT_NORESULTS . '</td></tr>';
+                }
+		else {
+			$i = 0; $first = 0; $last = 0;
+
+			while ($row = $this->_db->fetchAssoc($this->result))
+			{
+				echo '<tr class="tbl-row tbl-row-' . (($i % 2) ? 'odd' : 'even'); // Switch up the bgcolors on each row
+
+				// Handle row selects
+				if ($this->row_select){
+					echo ' tbl-row-highlight" onclick="' . $this->parseVariables($row, $this->row_select);
+                                }
+
+				echo '">';
+
+				$line = ($this->page == 1)
+							? $i + 1
+							: $i + 1 + (($this->page - 1) * $this->results_per_page);
+
+				$last = $line; // Last line
+				if ($first === 0){
+					$first = $line; // First line
+                                }
+
+				if ($this->show_row_number){
+					echo '<td class="tbl-row-num">' . $line . '</td>';
+                                }
+
+				if ($this->show_checkboxes){
+					echo '<td align="center"><input type="checkbox" class="tbl-checkbox" id="checkbox" name="tbl-checkbox" value="' . $row[$this->primary] . '"></td>';
+                                }
+
+				foreach ($row as $key => $value)
+				{
+					// Skip if column is hidden
+					if (in_array($key, $this->hidden))
+						continue;
+
+					// Apply a column type to the value
+					if (array_key_exists($key, $this->type))
+					{
+						list($type, $criteria, $criteria_2) = $this->type[$key];
+
+						switch ($type)
+						{
+							case self::TYPE_ONCLICK:
+								if ($value){
+									$value = '<a href="javascript:;" onclick="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
+								break;
+
+							case self::TYPE_HREF:
+								if ($value){
+									$value = '<a href="' . $this->parseVariables($row, $criteria) . '">' . $value . '</a>';
+                                                                }
+								break;
+
+							case self::TYPE_DATE:
+								if ($criteria_2 == true){
+									$value = date($criteria, strtotime($value));
+                                                                }
+								else{
+									$value = date($criteria, $value);
+                                                                }
+								break;
+
+							case self::TYPE_IMAGE:
+								$value = '<img src="' . $this->parseVariables($row, $criteria) . '" id="' . $key . '-' . $i . '">';
+								break;
+
+							case self::TYPE_ARRAY:
+								$value = $criteria[$value];
+								break;
+
+							case self::TYPE_CHECK:
+								if ($value == '1' or $value == 'yes' or $value == 'true' or ($criteria != '' and $value == $criteria)){
+									$value = '<img src="' . $this->image_path . 'check.gif">';
+                                                                }
+								break;
+
+							case self::TYPE_PERCENT:
+								if ($criteria == true){
+									$value *= 100; // Value is in decimal format
+                                                                }
+								$value = round($value); // Round to the nearest decimal
+
+								$value .= '%';
+
+								// Apply a bar if an array is supplied via criteria_2
+								if (is_array($criteria_2)){
+									$value = '<div style="background: ' . $criteria_2['Back'] . '; width: ' . $value . '; color: ' . $criteria_2['Fore'] . ';">' . $value . '</div>';
+                                                                }
+								break;
+
+							case self::TYPE_DOLLAR:
+								$value = '�' . number_format($value, 2);
+								break;
+
+							case self::TYPE_CUSTOM:
+								$value = $this->parseVariables($row, $criteria);
+								break;
+
+							case self::TYPE_FUNCTION:
+								if (is_array($criteria_2)){
+									$value = call_user_func_array($criteria, $this->parseVariables($row, $criteria_2));
+                                                                }
+								else{
+									$value = call_user_func($criteria, $this->parseVariables($row, $criteria_2));
+                                                                }
+								break;
+
+							default:
+								// Invalid column type
+								break;
+							}
+					}
+
+					echo '<td class="tbl-cell">' . $value . '</td>';
+				}
+
+				$this->buildControls($row);
+
+				echo '</tr>';
+
+				$i++;
+			}
+		}
+
+		echo '</tbody>';
+
+		$this->buildFooter($i, $first, $last);
+
+		echo '</table></form>';
+	}
+		
 }
