@@ -16,7 +16,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <div id="content">
 
 <?php
-
+$idPuestoEstudiante = $_GET['id'];
 require '../Conexion/cred.php';
 
 require '../tool/ceSQL.php';
@@ -28,15 +28,15 @@ $dg = new ceDataGrid($dbase);
 
 $dg->setQuery("EE08COTR,EE10COPU,EE11COIN","ee06trabjo");
 
-$dg->allowFilters();
 
 $dg->showCreateButton("href='../formularios/addJob.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE01COCN', 'Carnet');
 $dg->setColumnHeader('EE02NOES', 'Estudiante');
-$dg->setColumnHeader('EE18NOIN', 'Empresa');
-$dg->setColumnHeader('EE13NOPU', 'Puesto');
+$dg->setColumnHeader('EE25NOCR', 'Carrera');
+$dg->setColumnHeader('EE18NOIN', 'Universidad');
+
 
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
@@ -44,7 +44,7 @@ $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDe
 $dg->addItem(ceDataGrid::Go_WorkStation, "href='../mod/Puesto.php'");
 
 $dg->showReset("Refrescar");
-$dg->printTableJob();
+$dg->printTableII(ceDataGrid::Puesto, $idPuestoEstudiante);
 ?>
 </div>
 </body>

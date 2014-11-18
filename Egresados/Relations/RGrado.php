@@ -16,7 +16,7 @@ include  "./../protected.php"; /*Valida el inico de sesion*/
 <div id="content">
 
 <?php
-
+ $idEstudioEstudiante = $_GET['id'];
 require '../Conexion/cred.php';
 
 require '../tool/ceSQL.php';
@@ -26,25 +26,21 @@ $dbase = new ceMySQLAdap($server, $usuario, $password,$database);
 
 $dg = new ceDataGrid($dbase); 
 
-$dg->setQuery("EE08COTR,EE10COPU,EE11COIN","ee06trabjo");
+$dg->setQuery("EE28COES,EE29ENES,EE30FEIN,EE31FEFN,EE32PRES,EE33COCN","ee02estdio");
 
-$dg->allowFilters();
-
-$dg->showCreateButton("href='../formularios/addJob.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
+$dg->showCreateButton("href='../formularios/addStudy.php'", ceDataGrid::TYPE_ONCLICK, 'Agregar');
 $dg->setResultsPerPage(10);
 
 $dg->setColumnHeader('EE01COCN', 'Carnet');
 $dg->setColumnHeader('EE02NOES', 'Estudiante');
-$dg->setColumnHeader('EE18NOIN', 'Empresa');
-$dg->setColumnHeader('EE13NOPU', 'Puesto');
-
+$dg->setColumnHeader('EE29ENES', 'Enfásis');
+$dg->setColumnHeader('EE37NOGR', 'Grado');
 
 $dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDeletes/deleteTrabajo.php?id=%EE08COTR%'");
-$dg->addItem(ceDataGrid::Go_WorkStation, "href='../mod/Puesto.php'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudios.php?id=%EE28COES%'");
 
 $dg->showReset("Refrescar");
-$dg->printTableJob();
+$dg->printTableII(ceDataGrid::Grade, $idEstudioEstudiante);
 ?>
 </div>
 </body>
