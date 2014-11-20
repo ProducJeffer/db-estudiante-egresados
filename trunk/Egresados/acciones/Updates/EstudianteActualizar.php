@@ -3,17 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Actualizar estudiante</title>
-  <link rel="stylesheet" type="text/css" href="../css/mtb.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
-  <script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/ceGrid.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+  <script type="text/javascript" src="../../js/jquery-1.2.6.min.js"></script>
 </head>
 
 <?php
 date_default_timezone_set('America/Costa_Rica');
 // ------------------------------------
 // other php code
-require '../../Conexion/config.php';
+require '../../tool/config.php';
 require '../../tool/ceSQL.php';
 require '../../tool/ceGrid.php';
 
@@ -21,7 +20,7 @@ $dbase = new ceMySQLAdap($server,$usuario,$password,$database );
 
 $dg= new ceDataGrid($dbase);
 
-$id=$_GET['id'];
+$id = $_GET['id'];
 $SQLstr = "SELECT EE01COCN,EE05CEDU,EE02NOES,EE03PAPE,EE04SAPE FROM ee01estegr WHERE EE01COCN = '".$id."'";
 $resultado = $mysqli->query($SQLstr);
 while ($registros = $resultado->fetch_row())
@@ -36,7 +35,7 @@ $mysqli->close();
 ?>
 
 
-<a class="btn" href='index.php'>Listar Estudiantes</a>
+<a class="btn" href='../../mod/Estudiantes.php'>Listar Estudiantes</a>
 <body>
     <div id="content-mt">
     <div class="curved" >
@@ -76,8 +75,6 @@ $mysqli->close();
                        <input type="text" name="Txt_SAPE" id="apellido2"  value="<?php echo $vSAPE; ?>" maxlength="80" /> 
                    </label>
                </tr>
-
-
                <tr>
                    <td></td>
                    <td><label>
@@ -104,7 +101,7 @@ $mysqli->close();
         };
         $.ajax({
           type:"POST",
-            url:"Update.php",
+            url:"EstudianteUpdate.php",
             data:form_data,
             success: function(responde){
                     $("#error").html(responde);

@@ -1,5 +1,5 @@
 <?php
-require 'cred.php'; 
+require '../Conexion/cred.php'; 
 /**
  * Provides datagrid control features
  *

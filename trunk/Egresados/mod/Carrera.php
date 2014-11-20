@@ -39,7 +39,7 @@ $dg->setColumnHeader('EE25NOCR', 'Nombre');
 
 
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='../acciones/Updates/CarreraActualizar.php?id=%EE24COCR%'");
 $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteCarrera.php?id=%EE24COCR%'");
 $dg->addItem(ceDataGrid::Go_Study, "href='../Relations/RCareer.php?id=%EE24COCR%'");
 
@@ -47,5 +47,6 @@ $dg->showReset("Refrescar");
 $dg->printTable();
 ?>
 </div>
+    <a href="../acciones/Updates/CarreraActualizar.php"></a>
 </body>
 </html>

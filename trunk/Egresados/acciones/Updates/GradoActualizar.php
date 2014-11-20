@@ -6,15 +6,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Actualizar grados</title>
-  <link rel="stylesheet" type="text/css" href="../css/mtb.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
-  <script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/ceGrid.css"/>
+  <script type="text/javascript" src="../../js/jquery-1.2.6.min.js"></script>
 </head>
 
 <?php
 
 require '../tool/config.php';
+
 $id=$_GET['id'];
 $SQLstr = "SELECT EE36COGR,EE37NOGR FROM ee04grado WHERE EE36COGR = '".$id."'";
 $resultado = $mysqli->query($SQLstr);
@@ -26,7 +26,7 @@ while ($registros = $resultado->fetch_row())
 $mysqli->close();
 ?>
 
-<a class="btn" href='index.php'>Listar Grados</a>
+<a class="btn" href='../../mod/Grado.php'>Listar Grados</a>
 <body>
     <div id="content-mt">
 		<div class="curved" >
@@ -70,7 +70,7 @@ $mysqli->close();
         };
         $.ajax({
           type:"POST",
-            url:"Update.php",
+            url:"GradoUpdate.php",
             data:form_data,
             success: function(responde){
                     $("#error").html(responde);

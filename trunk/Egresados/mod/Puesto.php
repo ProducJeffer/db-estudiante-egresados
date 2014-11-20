@@ -40,7 +40,7 @@ $dg->setColumnHeader('EE14NODE', 'Departamento');
 $dg->setColumnHeader('EE15TIOP', 'Tiempo trabajando');
 
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='../acciones/Updates/PuestoActualizar.php?id=%EE12COPU%'");
 $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deletePuesto.php?id=%EE12COPU%'");
 
 $dg->showReset("Refrescar");
