@@ -40,7 +40,7 @@ $dg->setColumnHeader('EE20NOCP', 'Campus');
 $dg->setColumnHeader('EE21DINS', 'Dirección');
 
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='../acciones/Updates/InstitucionActualizar.php?id=%EE17COIN%'");
 $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteInstitucion.php?id=%EE17COIN%'");
 $dg->addItem(ceDataGrid::Go_Job, "href='../Relations/RTrabajotoInst.php?id=%EE17COIN%'");
 $dg->addItem(ceDataGrid::Go_Career, "href='../Relations/RPuesto.php?id=%EE17COIN%'");

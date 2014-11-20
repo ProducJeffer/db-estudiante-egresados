@@ -5,16 +5,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Actualizar estudios</title>
-  <link rel="stylesheet" type="text/css" href="../css/mtb.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
-  <script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>
+  <title>Actualizar carrera</title>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/ceGrid.css"/>
+  <script type="text/javascript" src="../../js/jquery-1.2.6.min.js"></script>
 </head>
 
 <?php
-date_default_timezone_set('America/Costa_Rica');
-require '../../Conexion/cred.php';
+
+require '../tool/config.php';
+
 $id=$_GET['id'];
 $SQLstr = "SELECT EE24COCR,EE25NOCR FROM ee03crrera WHERE EE24COCR = '".$id."'";
 $resultado = $mysqli->query($SQLstr);
@@ -26,11 +26,11 @@ while ($registros = $resultado->fetch_row())
 $mysqli->close();
 ?>
 
-<a class="btn" href='index.php'>Listar Estudios</a>
+<a class="btn" href='../../mod/Carrera.php'>Listar carreras</a>
 <body>
     <div id="content-mt">
 		<div class="curved" >
-			<h2>Actualizar Estudios<h2>
+			<h2>Actualizar carrera<h2>
 		</div>
         <div id="div01"  class="curved" >
          <div id="error"></div>

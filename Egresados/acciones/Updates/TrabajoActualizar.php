@@ -6,15 +6,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Actualizar trabajo</title>
-  <link rel="stylesheet" type="text/css" href="../css/mtb.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/main.css"/>
-  <link rel="stylesheet" type="text/css" href="../css/ceGrid.css"/>
-  <script type="text/javascript" src="../js/jquery-1.2.6.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../../css/main.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/ceGrid.css"/>
+  <script type="text/javascript" src="../../js/jquery-1.2.6.min.js"></script>
 </head>
 
 <?php
 
 require '../tool/config.php';
+
 $id=$_GET['id'];
 $SQLstr = "SELECT EE08COTR,EE10COPU,EE11COIN FROM ee06trabjo WHERE EE08COTR = '".$id."'";
 $resultado = $mysqli->query($SQLstr);
@@ -27,7 +27,7 @@ while ($registros = $resultado->fetch_row())
 $mysqli->close();
 ?>
 
-<a class="btn" href='index.php'>Listar trabajos</a>
+<a class="btn" href='../../mod/Trabajos.php'>Listar trabajos</a>
 <body>
     <div id="content-mt">
 		<div class="curved" >
@@ -78,7 +78,7 @@ $mysqli->close();
         };
         $.ajax({
           type:"POST",
-            url:"Update.php",
+            url:"TrabajoUpdate.php",
             data:form_data,
             success: function(responde){
                     $("#error").html(responde);

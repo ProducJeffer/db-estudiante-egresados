@@ -37,7 +37,7 @@ $dg->setColumnHeader('EE36COGR', 'Código grado');
 $dg->setColumnHeader('EE37NOGR', 'Grado');
 
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
+$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='../acciones/Updates/GradoActualizar.php?id=%EE36COGR%'");
 $dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteGrado.php?id=%EE36COGR%'");
 
 $dg->showReset("Refrescar");
