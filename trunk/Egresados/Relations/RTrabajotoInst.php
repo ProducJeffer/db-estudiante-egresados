@@ -37,11 +37,6 @@ $dg->setColumnHeader('EE02NOES', 'Estudiante');
 $dg->setColumnHeader('EE18NOIN', 'Empresa');
 $dg->setColumnHeader('EE13NOPU', 'Puesto');
 
-
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/generalDeletes/deleteTrabajo.php?id=%EE08COTR%'");
-$dg->addItem(ceDataGrid::Go_WorkStation, "href='../mod/Puesto.php'");
-
 $dg->showReset("Refrescar");
 $dg->printTableII(ceDataGrid::JobtoI, $idTrabajoInsti);
 ?>

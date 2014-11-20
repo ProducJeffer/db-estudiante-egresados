@@ -38,10 +38,6 @@ $dg->setColumnHeader('EE30FEIN', 'Fecha Inicio');
 $dg->setColumnHeader('EE31FEFN', 'Fecha final');
 $dg->setColumnHeader('EE32PRES', 'Promedio final');
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudios.php?id=%EE28COES%'");
-$dg->addItem(ceDataGrid::Go_Grade, "href='../mod/Grado.php'");
-
 $dg->showReset("Refrescar");
 $dg->printTableII(ceDataGrid::Student, $idEstudiante);
 ?>

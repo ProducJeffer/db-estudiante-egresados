@@ -1,5 +1,5 @@
 <?php
-require '../Conexion/cred.php';
+require 'cred.php'; 
 /**
  * Provides datagrid control features
  *
@@ -51,7 +51,7 @@ class ceDataGrid
         public $img_carrera = 'carrera.png';
         public $img_puesto = 'silla.png';
 
-
+        
 	// Configuration constants
 	const CUSCTRL_TEXT = 1;
 	const CUSCTRL_IMAGE = 2;
@@ -90,6 +90,7 @@ class ceDataGrid
         const Grade = 5;
         const Puesto = 6;
 
+        
 
 	// Default text
 	const TXT_RESET = '';
@@ -307,7 +308,7 @@ class ceDataGrid
 		$this->results_per_page = (int) $num;
 		$this->setLimit(0, (int) $num);
 	}
-
+        
 	/**
 	* Adds a standard control to a row
 	*
@@ -399,7 +400,7 @@ class ceDataGrid
 		$this->create_button = array('Action' => $action,
 										'Text' => $text);
 	}
-
+        
 	/**
 	* Adds ability to select a entire row
 	*
@@ -1052,7 +1053,7 @@ class ceDataGrid
                         $query = 'SELECT  b.EE33COCN, a.EE02NOES, b.EE29ENES, b.EE30FEIN, b.EE31FEFN, b.EE32PRES FROM ee01estegr a, ee02estdio b WHERE a.EE01COCN = b.EE33COCN AND a.EE01COCN = ' .$id;
                         break;
                     case self::JobtoS:
-                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE07COTR = d.EE08COTR AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU AND a.EE01COCN = ' .$id;
+                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE01COCN = d.EE42COCN AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU AND a.EE01COCN = ' .$id;
                         break;
                     case self::JobtoC:
                         $query = 'SELECT a.EE01COCN, a.EE02NOES, b.EE29ENES, c.EE37NOGR FROM ee01estegr a, ee02estdio b, ee04grado c WHERE a.EE01COCN = b.EE33COCN AND b.EE34COGR = c.EE36COGR AND b.EE28COES =' .$id;
@@ -1077,7 +1078,7 @@ class ceDataGrid
 		}
 
 		// Count the number of rows without the limit clause
-		$this->row_count = (int) $this->_db->selectOneValue('COUNT(*)', $this->select_table, $filter_query); // Old code which does not support large data sets: $this->_db->countRows($query);
+		$this->row_count = $this->_db->rowCount($query); // Old code which does not support large data sets: $this->_db->countRows($query);
 
 		if (!$this->isAjaxUsed())
 		{
@@ -1288,7 +1289,7 @@ class ceDataGrid
 			$limit = '';
                 }
                 
-                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE07COTR = d.EE08COTR AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU';
+                        $query ='SELECT a.EE01COCN, a.EE02NOES, b.EE18NOIN, c.EE13NOPU FROM ee01estegr a, ee05instcn b, ee07puesto c, ee06trabjo d WHERE a.EE01COCN = d.EE42COCN AND b.EE17COIN = d.EE11COIN AND c.EE12COPU = d.EE10COPU';
                       
                     
 		
@@ -1301,8 +1302,8 @@ class ceDataGrid
 		}
 
 		// Count the number of rows without the limit clause
-		$this->row_count = (int) $this->_db->selectOneValue('COUNT(*)', $this->select_table, $filter_query); // Old code which does not support large data sets: $this->_db->countRows($query);
-
+		$this->row_count = $this->_db->rowCount($query);
+                
 		if (!$this->isAjaxUsed())
 		{
 			// Print out required javascript functions

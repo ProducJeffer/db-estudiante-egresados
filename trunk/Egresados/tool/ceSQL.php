@@ -22,6 +22,7 @@ class ceMySQLAdap
 	 */
 
 	private $result;
+        private $filas;
 
 	/**
 	 * Date and time
@@ -112,7 +113,15 @@ class ceMySQLAdap
 
 		return $this->result;
 	}
+        
+        public function rowCount($query)
+	{
+		$result = mysql_query($query, $this->link);
 
+		$this->filas = mysql_num_rows($result);
+                
+                return $this->filas;
+	}
 	/**
 	 * Update the database
 	 *
