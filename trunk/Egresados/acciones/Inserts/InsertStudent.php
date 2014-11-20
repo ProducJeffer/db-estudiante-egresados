@@ -20,7 +20,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudiantes.php">Regresar</a></div>';
     echo'<strong><p class="alert-error">Campo vacio</p></strong>';
     }
     $conn = mysql_connect($server, $usuario, $password);
@@ -36,7 +36,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudiantes.php">Regresar</a></div>';
          echo'<strong><p class="alert-error">El estudiante ya se encuentra registrado</p></strong>';
      }else{
     $sqlQuery = "INSERT INTO ee01estegr VALUES('" .$carnet. "', '" .$nombre. "', '" .$apellido1. "', '" .$apellido2. "', " .$cedula. ", '" .$coes. "', '" .$cotr. "')";
@@ -49,7 +49,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudiantes.php">Regresar</a></div>';
      echo'<strong><p class="alert-success">Estudiante registrado</p></strong>';    
      
         }

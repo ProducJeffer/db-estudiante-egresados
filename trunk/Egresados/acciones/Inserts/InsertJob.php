@@ -16,7 +16,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Trabajos.php">Regresar</a></div>';
     echo'<strong><p class="alert-error">Campo vacio</p></strong>';
     }
     $conn = mysql_connect($server, $usuario, $password);
@@ -32,7 +32,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Trabajos.php">Regresar</a></div>';
          echo'<strong><p class="alert-error">El trabajo ya se encuentra registrada</p></strong>';
      }else{
     $sqlQuery = "INSERT INTO ee06trabjo VALUES('" .$codTrabajo. "', '" .$copu. "', '" .$coin. "')";
@@ -45,7 +45,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Trabajos.php">Regresar</a></div>';
      echo'<strong><p class="alert-success">Trabajo registrado</p></strong>';    
      
         }

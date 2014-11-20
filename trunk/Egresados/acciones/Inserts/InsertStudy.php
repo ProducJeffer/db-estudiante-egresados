@@ -21,7 +21,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudio.php">Regresar</a></div>';
     echo'<strong><p class="alert-error">Campo vacio</p></strong>';
     }
     $conn = mysql_connect($server, $usuario, $password);
@@ -37,7 +37,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudio.php">Regresar</a></div>';
          echo'<strong><p class="alert-error">La carrera ya se encuentra registrada</p></strong>';
      }else{
     $sqlQuery = "INSERT INTO ee02estdio VALUES('" .$codEstudio. "', '" .$enfasis. "', '" .$inicio. "' , '" .$final. "', " .$promedio. ", '" .$carnet. "', '" .$codicog. "', '" .$codicoc. "')";
@@ -50,7 +50,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Estudio.php">Regresar</a></div>';
      echo'<strong><p class="alert-success">Estudio registrado</p></strong>';    
      
         }
