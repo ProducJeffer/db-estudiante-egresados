@@ -36,10 +36,6 @@ $dg->setColumnHeader('EE02NOES', 'Estudiante');
 $dg->setColumnHeader('EE29ENES', 'Enfásis');
 $dg->setColumnHeader('EE37NOGR', 'Grado');
 
-$dg->addStandardControl(ceDataGrid::STDCTRL_EDIT, "href='mt02.php?id=%EE01COCN%'");
-$dg->addStandardControl(ceDataGrid::STDCTRL_DELETE, "href='../acciones/Deletes/deleteEstudios.php?id=%EE28COES%'");
-$dg->addItem(ceDataGrid::Go_Grade, "href='../mod/Grado.php'");
-
 $dg->showReset("Refrescar");
 $dg->printTableII(ceDataGrid::JobtoC, $idEstudianteCarrera);
 ?>
