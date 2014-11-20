@@ -15,7 +15,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Grado.php">Regresar</a></div>';
     echo'<strong><p class="alert-error">Campo vacio</p></strong>';
     }
     $conn = mysql_connect($server, $usuario, $password);
@@ -31,7 +31,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href../../mod/Grado.php">Regresar</a></div>';
          echo'<strong><p class="alert-error">El grado ya se encuentra registrada</p></strong>';
      }else{
     $sqlQuery = "INSERT INTO ee04grado VALUES('" .$codGrado. "', '" .$grado. "', '" .$ce. "')";
@@ -44,7 +44,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Grado.php">Regresar</a></div>';
      echo'<strong><p class="alert-success">Grado registrada</p></strong>';    
      
         }

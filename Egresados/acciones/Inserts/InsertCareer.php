@@ -17,7 +17,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Carrera.php">Regresar</a></div>';
     echo'<strong><p class="alert-error">Campo vacio</p></strong>';
     }
     $conn = mysql_connect($server, $usuario, $password);
@@ -33,7 +33,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Carrera.php">Regresar</a></div>';
          echo'<strong><p class="alert-error">La carrera ya se encuentra registrada</p></strong>';
      }else{
     $sqlQuery = "INSERT INTO ee03crrera VALUES('" .$codCarrera. "', '" .$nombCarrera. "', '" .$codInstitucion. "' , '" .$codEstudio. "')";
@@ -46,7 +46,7 @@ require '../../Conexion/cred.php';
             font-family: Helvetica, sans-serif;
             border-radius: 5px;
             border: 1px solid black;
-        " href="../../index.php">Regresar</a></div>';
+        " href="../../mod/Carrera.php">Regresar</a></div>';
      echo'<strong><p class="alert-success">Carrera registrada</p></strong>';    
      
         }
